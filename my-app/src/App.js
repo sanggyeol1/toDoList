@@ -123,7 +123,7 @@ function Write({postTitle, setPostTitle, postDate, setPostDate}){
           
         }
         
-      }} variant="outline-dark">글 발행</Button>
+      }} variant="outline-dark">글 발행하기</Button>
       
     </div>
     
