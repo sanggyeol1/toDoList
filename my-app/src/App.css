@@ -1,0 +1,22 @@
+.postContainer{
+  border : 1px solid black;
+  margin : 5px 15px 10px 15px;
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 3px 3px 3px;
+}
+.postTitle{
+  font-size: 1.2em;
+  margin : 3px
+}
+
+.postDate{
+  margin : 3px
+}
+
+.writeBtn{
+  margin : 5px 15px 5px 15px
+}
+.writeBox{
+  margin : 5px 15px 5px 15px
+}
