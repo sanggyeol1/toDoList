@@ -5,9 +5,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import {Detail} from './pages/detail'
+import List from "./pages/list"
 import Edit from './pages/edit';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+
 
 import './App.css';
 
@@ -15,6 +18,7 @@ function App() {
   let navigate = useNavigate()
   let [postTitle, setPostTitle] = useState(['밥먹기','산책하기','데이트하기'])
   let [postDate, setPostDate] = useState(['1월1일','2월13일','3월1일'])
+  let [postDetail, setPostDetail] = useState(['1번상세내용임 밥 맛있게먹기','2번상세내용임 산책 맛있게 하기','3번 상세내용임 데이트 하기'])
   let [write,setWrite] = useState(false)
 
 
@@ -23,17 +27,22 @@ function App() {
     <>
     <Navbar bg="dark" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="/">할일리스트</Navbar.Brand>
+        <Navbar.Brand href="/">미리알림</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="#home">List</Nav.Link>
           <Nav.Link href="#features">Chat</Nav.Link>
         </Nav>
       </Container>
     </Navbar>
+
+    
     
     <Routes>
-      <Route path="/" element={<div>
-        <h3 className='mt-2' style={{textAlign : 'center'}}>오늘할일</h3>
+
+    <Route path="/" element={<List postTitle={postTitle} setPostTitle={setPostTitle} setPostDate={setPostDate} postDate={postDate} postDetail={postDetail} setPostDetail={setPostDetail}/>}/>
+
+
+      <Route path="/todo" element={<div>
+        <h3 className='mt-2' style={{textAlign : 'center'}}>할일</h3>
           {
             postTitle.map((a, i)=>{
               return(
@@ -55,7 +64,7 @@ function App() {
               )
             })
           }
-      <Button className="writeBtn" variant="primary" onClick={()=>{
+       <Button className="writeBtn" variant="primary" onClick={()=>{
          if(write==false){
           setWrite(true)
         }else{
@@ -65,15 +74,18 @@ function App() {
 
       {
         write == true ? 
-        <Write postTitle={postTitle} setPostTitle={setPostTitle} setPostDate={setPostDate} postDate={postDate}/> : null
+        <Write postTitle={postTitle} setPostTitle={setPostTitle} setPostDate={setPostDate} postDate={postDate} postDetail={postDetail} setPostDetail={setPostDetail}/> : null
       }
 
       </div>}/>
 
 
+      <Route path="/detail/:id" element={<Detail postTitle={postTitle} setPostTitle={setPostTitle} setPostDate={setPostDate} postDate={postDate} postDetail={postDetail} setPostDetail={setPostDetail}/>}/>
+      <Route path="/edit/:id" element={<Edit postTitle={postTitle} setPostTitle={setPostTitle} setPostDate={setPostDate} postDate={postDate} postDetail={postDetail} setPostDetail={setPostDetail}/>}/>
 
-      <Route path="/detail/:id" element={<Detail postTitle={postTitle} setPostTitle={setPostTitle} setPostDate={setPostDate} postDate={postDate}/>}/>
-      <Route path="/edit/:id" element={<Edit postTitle={postTitle} setPostTitle={setPostTitle} setPostDate={setPostDate} postDate={postDate}/>}/>
+      
+
+
     </Routes>
 
     </>
@@ -81,11 +93,10 @@ function App() {
 }
 
 
-
-function Write({postTitle, setPostTitle, postDate, setPostDate}){
+function Write({postTitle, setPostTitle, postDate, setPostDate, postDetail, setPostDetail}){
   let 작성제목
   let 약속날짜
-
+  let 상세내용
   return(
     <div className='writeBox'>
       <InputGroup size="lg" className="mb-3" onChange={(e)=>{
@@ -108,6 +119,17 @@ function Write({postTitle, setPostTitle, postDate, setPostDate}){
           aria-describedby="inputGroup-sizing-default"
         />
       </InputGroup>
+     
+      
+      <FloatingLabel controlId="floatingTextarea2" label="상세내용" onChange={(e)=>{
+        상세내용 = e.target.value
+      }}>
+        <Form.Control
+          as="textarea"
+          placeholder="Leave a comment here"
+          style={{ height: '100px' }}
+        />
+      </FloatingLabel><br/>
 
       <Button onClick={()=>{
 
@@ -119,11 +141,15 @@ function Write({postTitle, setPostTitle, postDate, setPostDate}){
           let copy2 = [...postDate]
           copy2.push(약속날짜)
           setPostDate(copy2)
+
+          let copy3 = [...postDetail]
+          copy3.push(상세내용)
+          setPostDetail(copy3)
         }else{
           
         }
         
-      }} variant="outline-dark">글 발행하기</Button>
+      }} variant="outline-dark">글 발행하기</Button><br/><br/><br/><br/><br/><br/><br/>
       
     </div>
     

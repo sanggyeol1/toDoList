@@ -2,26 +2,31 @@ import { useParams } from "react-router-dom"
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 
-function Edit({postTitle, setPostTitle, postDate, setPostDate}){
+function Edit(props){
 
     let {id} = useParams()
     let navigate = useNavigate()
 
     let changedTitle
     let changedDate
+    let changedDetail
     return(
         <div className="postContainer">
-            <h3><input onChange={(e)=>{changedTitle=e.target.value}} type="text" placeholder={postTitle[id]}/></h3>
-            <p><input onChange={(e)=>{changedDate=e.target.value}} type="text" placeholder={postDate[id]}/></p>
-            <p><input type="text" placeholder="상세내용"/></p>
+            <h3><input onChange={(e)=>{changedTitle=e.target.value}} type="text" placeholder={props.postTitle[id]}/></h3>
+            <p><input onChange={(e)=>{changedDate=e.target.value}} type="text" placeholder={props.postDate[id]}/></p>
+            <p><input onChange={(e)=>{changedDetail=e.target.value}} type="text" placeholder={props.postDetail[id]}/></p>
             <Button onClick={()=>{ 
-                let copy = [...postTitle]
+                let copy = [...props.postTitle]
                 copy[id] = changedTitle
-                setPostTitle(copy)
+                props.setPostTitle(copy)
 
-                let copy2 = [...postDate]
+                let copy2 = [...props.postDate]
                 copy2[id] = changedDate
-                setPostDate(copy2)
+                props.setPostDate(copy2)
+
+                let copy3 = [...props.postDetail]
+                copy3[id] = changedDetail
+                props.setPostDetail(copy3)
 
                 navigate('/')
              }}>완료</Button>

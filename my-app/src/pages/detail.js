@@ -10,7 +10,7 @@ function Detail(props){
         <div className="postContainer">
             <h3>{props.postTitle[id]}</h3>
             <p>{props.postDate[id]}</p>
-            <p>상세내용</p>
+            <p>{props.postDetail[id]}</p>
             <Button onClick={()=>{ navigate("/edit/"+id)}}>수정</Button>
         </div>
     )
