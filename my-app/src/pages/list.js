@@ -3,8 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useNavigate, Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { addTitle } from '../store';
 
 function List(props){
+    let dispatch = useDispatch()
+    let state = useSelector((state)=>{ return state })
     let navigate = useNavigate()
     let [list, setList] = useState(['오늘','예정','전체','깃발표시','완료됨', '기타'])
     let listIcon = [
@@ -55,7 +59,7 @@ function List(props){
             <div>
             <img src="https://img.icons8.com/?size=512&id=12581&format=png" width={'30px'}/> <strong> 할일 </strong>  
             </div>
-            <div><h2>{props.postTitle.length} > </h2></div></div>
+            <div><h2> {state.posts.length}> </h2></div></div>
         </div>
         </>
     )
