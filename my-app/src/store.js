@@ -13,12 +13,20 @@ let posts = createSlice({
       state.push(action.payload)
     },
     deletePosts(state, action){
-      state.splice(action.payload, 1)
+     let 지울거 = state.findIndex((e)=> e.id == action.payload )
+     state.splice(지울거, 1)
     },
+    editPosts(state, action){
+      let 바꿀번호 = state.findIndex((e)=>e.id == action.payload.id)
+      state[바꿀번호].title = action.payload.title
+      state[바꿀번호].date = action.payload.date
+      state[바꿀번호].content = action.payload.content
+    }
+   
   }
 })
 
-export let { addPosts, deletePosts } = posts.actions
+export let { addPosts, deletePosts, editPosts } = posts.actions
 
 
 let write = createSlice({

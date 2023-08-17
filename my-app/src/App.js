@@ -11,7 +11,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';import { useDispatch, useSelector } from 'react-redux'
 import { addPosts, deletePosts, setWrite } from './store';
-
+import { useParams } from "react-router-dom"
 import './App.css';
 
 function App() {
@@ -52,10 +52,10 @@ function App() {
                   }} className='postTitle'> {state.posts[i].title} 
                   </div>
                   <div> { state.posts[i].date } </div>
-                  
+                  <div> { state.posts[i].id } </div>
                   
                   <Button onClick={()=>{
-                    dispatch(deletePosts(i))
+                    dispatch(deletePosts(state.posts[i].id))
                   }}>삭제2</Button>    
                 </div>
               )
@@ -85,7 +85,7 @@ function App() {
   );
 }
 
-
+let 글번호 = 3
 function Write(){
   let 작성제목
   let 약속날짜
@@ -93,6 +93,8 @@ function Write(){
   let state = useSelector((state)=>{ return state })
   let dispatch = useDispatch()
  
+
+
   return(
     <div className='writeBox'>
       <InputGroup size="lg" className="mb-3" onChange={(e)=>{
@@ -130,12 +132,15 @@ function Write(){
       
       <Button onClick={()=>{
         dispatch(addPosts({
+          id : 글번호++, 
           title : 작성제목,
           date : 약속날짜,
           content : 상세내용
         }))
 
         dispatch(setWrite())
+
+        
       }}>글발행</Button>
       <br/><br/><br/><br/><br/><br/><br/>
       
