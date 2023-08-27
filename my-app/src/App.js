@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import {Detail} from './pages/detail'
 import List from "./pages/list"
 import Edit from './pages/edit';
+import Login from './pages/login'
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';import { useDispatch, useSelector } from 'react-redux'
@@ -30,7 +31,9 @@ function App() {
         <Navbar.Brand href="/">미리알림</Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="#features">Chat</Nav.Link>
+          <Nav.Link href="/login">Login</Nav.Link>
         </Nav>
+        
       </Container>
     </Navbar>
 
@@ -56,7 +59,7 @@ function App() {
                   
                   <Button onClick={()=>{
                     dispatch(deletePosts(state.posts[i].id))
-                  }}>삭제2</Button>    
+                  }}>삭제</Button>    
                 </div>
               )
             })
@@ -72,7 +75,7 @@ function App() {
 
       </div>}/>
 
-
+      <Route path="/login" element={<Login/>}/>
       <Route path="/detail/:id" element={<Detail/>}/>
       <Route path="/edit/:id" element={<Edit/>}/>
 
