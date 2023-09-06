@@ -59,7 +59,7 @@ function App() {
                   
                   <Button onClick={()=>{
                     dispatch(deletePosts(state.posts[i].id))
-                  }}>삭제</Button>    
+                  }}>삭제</Button>
                 </div>
               )
             })
@@ -78,8 +78,6 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/detail/:id" element={<Detail/>}/>
       <Route path="/edit/:id" element={<Edit/>}/>
-
-      
 
 
     </Routes>
